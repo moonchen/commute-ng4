@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-sm-4" *ngFor="let route of routesObservable | async; index as i">
+    <div class="card mb-3">
+      <div class="card-header">
+        Route {{i}}
+        <span class="pull-right">
+          <div ngbDropdown class="d-inline-block">
+            <button type="button" class="btn btn-sm btn-secondary" ngbDropdownToggle></button>
+            <div class="dropdown-menu">
+              <button (click)="onDelete()" class="dropdown-item">Delete</button>
+            </div>
+          </div>
+        </span>
+      </div>
+      <div class="card-block">
+        <dl>
+          <dt>{{route.from.name}}</dt>
+          <dd><small>{{route.from.address}}</small></dd>
+          <dt>{{route.to.name}}</dt>
+          <dd><small>{{route.to.address}}</small></dd>
+        </dl>
+        <div class="pull-right">
+          <a [href]="'eta/' + i" class="btn btn btn-primary">Details »</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-template #deleteContent>
+    <div class="modal-header">
+      <h4 class="modal-title">Are you sure?</h4>
+      <button type="button" class="close" aria-label="Close" (click)="dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>This is a modal</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="close('confirm')">Confirm</button>
+      <button type="button" class="btn btn-secondary" (click)="dismiss('cancel')">Confirm</button>
+    </div>
+  </ng-template>
+</div>

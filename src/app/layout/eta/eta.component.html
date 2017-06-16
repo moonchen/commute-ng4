@@ -1,0 +1,18 @@
+<div class="loading-bar" *ngIf="loading">
+    <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+    </div>
+</div>
+<div [ngClass] ="loading ? 'commute-dashboard' : 'commute-dashboard-loaded' ">
+    <h2 class="text-center">Current Traffic</h2>
+    <div class="row">
+        <canvas baseChart height='300px' #etaCanvas [data]='etaChartData' [options]='etaChartOptions' chartType='line' [colors]='etaChartColors'></canvas>
+    </div>
+    <div class="jumbotron text-center">
+        <div class="traffic-details" *ngIf="routeInfo">
+            <p>If you leave now, driving from {{routeInfo.from.name}} to {{routeInfo.to.name}} will take <strong>{{currentDuration.humanize()}}</strong>.</p>
+            <p><a [href]="routeLink" class="btn btn-primary btn-lg" role="button">Get directions »</a></p>
+        </div>
+    </div>
+</div>

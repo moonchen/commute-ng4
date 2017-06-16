@@ -8,6 +8,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
+import { BASE_PATH } from './api/index';
+import { ETAApi, RouteApi, Route } from './api/index';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
@@ -31,7 +33,11 @@ export function HttpLoaderFactory(http: Http) {
             }
         })
     ],
-    providers: [AuthGuard],
+    providers: [AuthGuard,
+        { provide: BASE_PATH, useValue: 'https://7jxpo6qoi2.execute-api.us-east-1.amazonaws.com/beta/commute/1.2.0' },
+        ETAApi,
+        RouteApi
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

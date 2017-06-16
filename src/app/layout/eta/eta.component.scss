@@ -1,0 +1,15 @@
+.commute-dashboard {
+    opacity: 0;
+}
+
+.commute-dashboard-loaded {
+    opacity: 1;
+    transition: opacity 1s;
+    -webkit-transition: opacity 1s;
+    -moz-transition: opacity 1s;
+    -o-transition: opacity 1s;
+}
+
+.loading-bar {
+    width: 100%;
+}

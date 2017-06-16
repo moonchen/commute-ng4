@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-header',
@@ -10,17 +10,7 @@ export class HeaderComponent implements OnInit {
 
     constructor(private translate: TranslateService) { }
 
-    ngOnInit() {}
-
-    toggleSidebar() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle('push-right');
-    }
-
-    rltAndLtr() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle('rtl');
-    }
+    ngOnInit() { }
 
     onLoggedout() {
         localStorage.removeItem('isLoggedin');
