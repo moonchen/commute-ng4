@@ -18,7 +18,9 @@ export class RouteListComponent implements OnInit {
     this.routesObservable = this.routeAPI.getRoutes();
   }
 
-  onDelete(content) {
-    this.modalService.open(content);
+  onDelete(r: Route, content: any) {
+    this.modalService.open(content).result.then((result) => {
+      console.log('TODO: Delete', r);
+    });
   }
 }

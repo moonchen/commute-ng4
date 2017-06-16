@@ -7,7 +7,7 @@
           <div ngbDropdown class="d-inline-block">
             <button type="button" class="btn btn-sm btn-secondary" ngbDropdownToggle></button>
             <div class="dropdown-menu">
-              <button (click)="onDelete()" class="dropdown-item">Delete</button>
+              <button (click)="onDelete(route, deleteContent)" class="dropdown-item">Delete</button>
             </div>
           </div>
         </span>
@@ -25,19 +25,19 @@
       </div>
     </div>
   </div>
-  <ng-template #deleteContent>
+  <ng-template #deleteContent let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title">Are you sure?</h4>
-      <button type="button" class="close" aria-label="Close" (click)="dismiss('Cross click')">
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body">
-      <p>This is a modal</p>
+      <p>Delete this route?</p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-primary" (click)="close('confirm')">Confirm</button>
-      <button type="button" class="btn btn-secondary" (click)="dismiss('cancel')">Confirm</button>
+      <button type="button" class="btn btn-primary" (click)="c('confirm')">Confirm</button>
+      <button type="button" class="btn btn-secondary" (click)="d('cancel')">Cancel</button>
     </div>
   </ng-template>
 </div>
