@@ -20,9 +20,17 @@
           <dd><small>{{route.to.address}}</small></dd>
         </dl>
         <div class="pull-right">
-          <a [href]="'eta/' + i" class="btn btn btn-primary">Details »</a>
+          <a [routerLink]="['/eta', i]" class="btn btn btn-primary">Details »</a>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="card mb-3">
+    <div class="card-header">
+      Add a new route
+    </div>
+    <div class="card-block">
+      <button class="centered">+</button>
     </div>
   </div>
   <ng-template #deleteContent let-c="close" let-d="dismiss">

@@ -139,7 +139,7 @@ export class ETAComponent implements OnInit, AfterViewInit {
         this.routeAPI.getRoute(this.route).subscribe(
             (routeInfo: Route) => {
                 this.routeInfo = routeInfo;
-                this.routeLink = 'https://www.google.com/maps/dir/?api=1&origin=' + 
+                this.routeLink = 'https://www.google.com/maps/dir/?api=1&origin=' +
                     encodeURIComponent(routeInfo.from.address) +
                     '&destination=' + encodeURIComponent(routeInfo.to.address);
                 this.loadingHeader = false;

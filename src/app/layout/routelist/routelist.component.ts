@@ -10,7 +10,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class RouteListComponent implements OnInit {
-  public routesObservable: Observable<[Route]>;
+  public routesObservable: Observable<Route[]>;
 
   constructor(private routeAPI: RouteApi, private modalService: NgbModal) { }
 

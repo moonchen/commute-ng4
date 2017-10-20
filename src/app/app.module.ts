@@ -11,6 +11,8 @@ import { AuthGuard } from './shared';
 import { BASE_PATH } from './api/index';
 import { ETAApi, RouteApi, Route } from './api/index';
 
+import { AuthService } from './shared/auth/auth.service';
+
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: Http) {
     return new TranslateHttpLoader(http, '/assets/i18n/', '.json');
@@ -36,7 +38,8 @@ export function HttpLoaderFactory(http: Http) {
     providers: [AuthGuard,
         { provide: BASE_PATH, useValue: 'https://7jxpo6qoi2.execute-api.us-east-1.amazonaws.com/beta/commute/1.2.0' },
         ETAApi,
-        RouteApi
+        RouteApi,
+        AuthService
     ],
     bootstrap: [AppComponent]
 })

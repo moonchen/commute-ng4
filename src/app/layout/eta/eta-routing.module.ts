@@ -5,10 +5,7 @@ import { ETAComponent } from './eta.component';
 
 const routes: Routes = [
     {
-        path: '', component: ETAComponent,
-        children: [
-            { path: ':id', component: ETAComponent }
-        ]
+        path: ':id', component: ETAComponent,
     }
 ];
 

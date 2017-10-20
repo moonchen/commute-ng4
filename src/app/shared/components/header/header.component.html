@@ -1,8 +1,17 @@
 <div class="pos-f-t fixed-top header">
-    <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-md">
-        <a class="navbar-brand" href="#">Commute Tracking</a>
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+    <nav class="navbar navbar-inverse bg-inverse navbar-toggleable-sm">
+        <button class="navbar-toggler navbar-toggler-right" type="button" (click)="navCollapse = !navCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-brand">Commute Tracking</div>
+        <div class="collapse navbar-collapse" [ngbCollapse]="navCollapse">
             <ul class="navbar-nav ml-auto mt-2 mt-md-0">
+                <li class="nav-item active">
+                    <a class="nav-link" routerLink="/routes">Routes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" routerLink="/eta/0">Chart</a>
+                </li>
                 <li class="nav-item dropdown" ngbDropdown>
                     <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                         <i class="fa fa-language"></i> {{ 'language' | translate }} <b class="caret"></b>
@@ -15,13 +24,14 @@
                 </li>
                 <li class="nav-item dropdown" ngbDropdown>
                     <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
-                        <i class="fa fa-user"></i> John Smith <b class="caret"></b>
+                        <i class="fa fa-user"></i> {{ username }} <b class="caret"></b>
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">
-                        <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        <a *ngIf="!auth.isAuthenticated()" class="dropdown-item" (click)="onLogIn()"><i class="fa fa-fw fa-user"></i> Log In</a>
+                        <a class="dropdown-item" routerLink="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
                         <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
                         <a class="dropdown-item" href="javascript:void(0)"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                        <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        <a *ngIf="auth.isAuthenticated()" class="dropdown-item" (click)="onLogOut()"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                     </div>
                 </li>
             </ul>
