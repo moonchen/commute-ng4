@@ -69,7 +69,7 @@ export class ETAComponent implements OnInit, AfterViewInit {
             display: false
         },
         hover: {
-            mode: 'x',
+            mode: 'index',
             intersect: false
         }
     };
