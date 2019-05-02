@@ -36,6 +36,7 @@ $ npm start
 # prod build, will output the production application in `dist`
 # the produced code can be deployed (rsynced) to a remote server
 $ npm run build
+This isn't working right now.  Try ng build --environment prod
 ```
 
 ### Code scaffolding
