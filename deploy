@@ -1,1 +1,2 @@
-aws s3 cp dist s3://commute-io/ --recursive
+aws s3 sync dist s3://commute-io/ --acl public-read
+aws s3 cp apple-touch-icon.png s3://commute-io/ --acl public-read
