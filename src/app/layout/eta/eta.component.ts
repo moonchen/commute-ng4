@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ElementRef } from '@angula
 import { BaseChartDirective } from 'ng2-charts';
 import * as moment from 'moment';
 import { ETAApi, RouteApi, Route } from '../../api/index';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
     selector: 'app-eta',
@@ -15,12 +16,13 @@ export class ETAComponent implements OnInit, AfterViewInit {
     private beginDate = moment().hour(14).minute(0).second(0);
     private endDate = moment().hour(20).minute(0).second(0);
     private lastPoint = this.beginDate.clone(); // The most recent fetched point
-    private route = 0;
+    private routeId = 0;
     public etaChartData: any = [{ data: {x: moment(), y: 600}, label: 'Travel time' }];
     public currentDuration: moment.Duration = moment.duration();
     public routeInfo: Route;
     public routeLink: string;
     private gradient: any;
+    private routeIdSub: any;
     public etaChartColors = [{}];
     public etaChartOptions = {
         maintainAspectRatio: false,
@@ -78,7 +80,7 @@ export class ETAComponent implements OnInit, AfterViewInit {
     public loadingGraph = true;
     public loadingProgress = 0;
 
-    constructor(private etaAPI: ETAApi, private routeAPI: RouteApi) { }
+    constructor(private etaAPI: ETAApi, private routeAPI: RouteApi, private route: ActivatedRoute) { }
 
     updateChartData(data) {
         const newPoints: Array<{ x: moment.Moment, y: number }> = [];
@@ -113,7 +115,7 @@ export class ETAComponent implements OnInit, AfterViewInit {
 
     requestData() {
         console.info('Requesting from ' + this.lastPoint.unix() + ' to ' + this.endDate.unix());
-        return this.etaAPI.getEta(this.route, this.lastPoint.unix(), this.endDate.unix());
+        return this.etaAPI.getEta(this.routeId, this.lastPoint.unix(), this.endDate.unix());
     }
 
     ngOnInit() {
@@ -129,6 +131,9 @@ export class ETAComponent implements OnInit, AfterViewInit {
             borderWidth: 1
         }];
         this.etaChartColors = etaChartColors;
+        this.routeIdSub = this.route.params.subscribe(params => {
+            this.routeId = +params['id']; // (+) converts string 'id' to a number
+         });
     }
 
     ngAfterViewInit() {
@@ -136,7 +141,7 @@ export class ETAComponent implements OnInit, AfterViewInit {
         this.etaChartData[0].data = [];
 
         // Get duration
-        this.routeAPI.getRoute(this.route).subscribe(
+        this.routeAPI.getRoute(this.routeId).subscribe(
             (routeInfo: Route) => {
                 this.routeInfo = routeInfo;
                 this.routeLink = 'https://www.google.com/maps/dir/?api=1&origin=' +
